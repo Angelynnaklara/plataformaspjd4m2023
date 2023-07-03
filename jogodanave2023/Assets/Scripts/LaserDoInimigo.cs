@@ -24,6 +24,7 @@ public class LaserDoInimigo : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
+            other.GetComponent<VidaDoJogador>().MachucarJogador(danoParaDar);
             Destroy(this.gameObject);
         }
     }

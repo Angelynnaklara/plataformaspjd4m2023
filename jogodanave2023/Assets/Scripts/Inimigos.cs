@@ -8,9 +8,10 @@ public class Inimigos : MonoBehaviour
     public int vidaMaximaDoInimigo;
     public int vidaAtualDoInimigo;
     public int pontosParaDar;
+    public int chanceParaDropar;
     public GameObject laserDoInimigo;
     public Transform localDoDisparo;
-
+    public GameObject itemParaDropar;
     public float velocidadeDoInimigos;
     public float tempoMaximoEntreOsLasers;
     public float tempoAtualDosLasers;
@@ -34,11 +35,13 @@ public class Inimigos : MonoBehaviour
         }
     }
 
-    private void MoviventarInimigo()
+
+          private void MoviventarInimigo()
     {
       transform.Translate(Vector3.down * velocidadeDoInimigo *Time.deltaTime);
     }
-    private void AtirarLaser()
+    
+          private void AtirarLaser()
     {
         tempoAtualDosLasers -= Time.deltaTime;
         if (tempoAtualDosLasers <=0)
@@ -54,6 +57,13 @@ public class Inimigos : MonoBehaviour
         if(vidaAtualDoInimigo <= 0)
         {
             GameManager.instance.AumentarPontuacao(pontosParaDar);
+
+          int numeroAleatorio=Random.Range(0,100);
+          if(numeroAleatorio<= chanceParaDropar)
+          {
+            Instantiate(itemParaDropar,transform.position,Quaternion.Euler(0f,0f,0f));
+          }
+
             Destroy(this.gameObject);
         }
     }

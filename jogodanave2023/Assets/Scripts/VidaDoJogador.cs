@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class VidaDoJogador : MonoBehaviour
 {
      public Slider barraDeVidaDoJogador;
+     public Slider barraDeEnergiaDoEscudo;
      public int vidaMaximaDoJogador;
-     public GameObject EscudoDoJogador;
+     public GameObject escudoDoJogador;
 
     public int vidaAtualDoJogador;
     public int vidaMaximaDoEscudo;
@@ -18,10 +19,13 @@ public class VidaDoJogador : MonoBehaviour
     void Start()
     {
          vidaAtualDoJogador =vidaMaximaDoJogador;
+         vidaAtualDoEscudo = vidaMaximaDoEscudo;
          barraDeVidaDoJogador.maxValue=vidaMaximaDoJogador;
          barraDeVidaDoJogador.value=vidaAtualDoJogador;
-
-         EscudoDoJogador.SetActive(false);
+         barraDeEnergiaDoEscudo.maxValue=vidaMaximaDoEscudo;
+         barraDeEnergiaDoEscudo.value = vidaAtualDoEscudo;
+         barraDeEnergiaDoEscudo.gameObject.SetActive(false);
+         escudoDoJogador.SetActive(false);
          temEscudo= false;
     }
 
@@ -32,9 +36,24 @@ public class VidaDoJogador : MonoBehaviour
     }
     public void AtivarEscudo()
     {
+      barraDeEnergiaDoEscudo.gameObject.SetActive(true);
       vidaAtualDoEscudo=vidaMaximaDoEscudo;
-      EscudoDoJogador.SetActive(true);
+      barraDeEnergiaDoEscudo.value=vidaAtualDoEscudo;
+      escudoDoJogador.SetActive(true);
       temEscudo= true;
+    }
+    public void GanharVida(int vidaParaReceber)
+    {
+      if(vidaAtualDoJogador + vidaParaReceber <=vidaMaximaDoJogador)
+      {
+        vidaAtualDoJogador += vidaParaReceber;
+      }
+      else
+      {
+        vidaAtualDoJogador = vidaMaximaDoJogador;
+      }
+      
+      barraDeVidaDoJogador.value = vidaAtualDoJogador;
     }
 
       public void MachucarJogador(int danoParaReceber)
@@ -53,10 +72,12 @@ public class VidaDoJogador : MonoBehaviour
       else
       {
         vidaAtualDoEscudo-= danoParaReceber;
+        barraDeEnergiaDoEscudo.value=vidaAtualDoJogador;
         if(vidaAtualDoEscudo<= 0)
         {
-          EscudoDoJogador.SetActive(false);
+          escudoDoJogador.SetActive(false);
           temEscudo=false;
+          barraDeEnergiaDoEscudo.gameObject.SetActive(false);
         }
       }
     }
