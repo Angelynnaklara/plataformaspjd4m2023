@@ -59,6 +59,6 @@ public class ControleDoJogador : MonoBehaviour
         private void DesativarLaserDuplo()
     {
       temLaserDuplo=false;
-      tempoAtualDosLasersDuplos=tempoAtualDosLasersDuplos;
+      tempoAtualDosLasersDuplos=tempoMaximoEntreOsLasersDuplos;
     }
 }

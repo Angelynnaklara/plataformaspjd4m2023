@@ -16,11 +16,13 @@ public class Inimigos : MonoBehaviour
     public float tempoMaximoEntreOsLasers;
     public float tempoAtualDosLasers;
     public bool inimigoAtirador;
+    public bool inimigoAtivado;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        inimigoAtivado = false;
+        vidaAtualDoInimigo = vidaMaximaDoInimigo;
     }
 
     // Update is called once per frame
@@ -28,11 +30,15 @@ public class Inimigos : MonoBehaviour
     {
         MoviventarInimigo();
         
-        if (inimigoAtirador== true)
+        if (inimigoAtirador== true && inimigoAtivado==true)
         {
            
             AtirarLaser();
         }
+    }
+    public void AtivarInimigo()
+    {
+        inimigoAtivado = true;
     }
 
 
