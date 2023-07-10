@@ -40,6 +40,10 @@ public class Inimigos : MonoBehaviour
             AtirarLaser();
         }
     }
+    public void AtivarInimigo()
+    {
+        inimigoAtivado = true;
+    }
 
     public void AtivarInimigo()
     {
