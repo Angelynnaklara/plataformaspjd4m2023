@@ -5,8 +5,13 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public AudioSource musicaDoJogo;
+    public AudioSource musicaDoGameOver;
     public static GameManager instance;
+    public Text textoDePontuacaoFinal;
+    public GameObject painelDeGameOver;
     public Text textoDePontuacaoAtual;
+    public Text textoDeHighScore;
     public int pontuacaoAtual;
 
     void Awake()
@@ -15,6 +20,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        Time.timeScale = 1f;
+
       pontuacaoAtual =0;
       textoDePontuacaoAtual.text= "PONTUAÇÃO: "+ pontuacaoAtual;
     }
@@ -27,5 +34,22 @@ public class GameManager : MonoBehaviour
     {
       pontuacaoAtual += pontosParaGanhar;
       textoDePontuacaoAtual.text= "PONTUAÇÃO: "+ pontuacaoAtual;
+    }
+
+    public void GameOver()
+    {
+
+        Time.timeScale = 0f;
+        musicaDoJogo.Stop();
+        musicaDoGameOver.Play();
+        painelDeGameOver.SetActive(true);
+        textoDePontuacaoFinal.text = "PONTUAÇÃO: " + pontuacaoAtual;
+
+        if (pontuacaoAtual>PlayerPrefs.GetInt("HighScore"))
+        {
+            PlayerPrefs.SetInt("HighScore", pontuacaoAtual);
+        }
+
+        textoDeHighScore.text = "HIGHSCORE: " + PlayerPrefs.GetInt("HighScore");
     }
 }

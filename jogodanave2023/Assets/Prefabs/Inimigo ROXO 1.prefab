@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6ee98008f5369cf45abee4c34778a3d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b348f508ae014948ba3e7a85f6efa51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  efeitoDeExplosao: {fileID: 6654556078720075130, guid: c7d43211809129144be8a733ff9234d4, type: 3}
   velocidadeDoInimigo: 15
   vidaMaximaDoInimigo: 3
   vidaAtualDoInimigo: 0
@@ -149,6 +150,8 @@ MonoBehaviour:
   tempoMaximoEntreOsLasers: 0
   tempoAtualDosLasers: 0
   inimigoAtirador: 0
+  inimigoAtivado: 0
+  danoDaNave: 4
 --- !u!1001 &7050552042726989739
 PrefabInstance:
   m_ObjectHideFlags: 0

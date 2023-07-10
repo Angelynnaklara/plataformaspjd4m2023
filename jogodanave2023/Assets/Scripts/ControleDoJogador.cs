@@ -14,17 +14,22 @@ public class ControleDoJogador : MonoBehaviour
     public float velocidadeDaNave;
     private Vector2 teclasApertadas;
     public bool temLaserDuplo;
+    public bool jogadorEstaVivo;
     // Start is called before the first frame update
     void Start()
     {   
         temLaserDuplo=false;
+        jogadorEstaVivo = true;
         tempoAtualDosLasersDuplos=tempoMaximoEntreOsLasersDuplos;
     }
     // Update is called once per frame
     void Update()
     {
         MovimentarJogador();
-        AtirarLaser();
+        if (jogadorEstaVivo == true)
+        {
+            AtirarLaser();
+        }
         if(temLaserDuplo==true)
         {
           tempoAtualDosLasersDuplos-=Time.deltaTime;
@@ -53,6 +58,7 @@ public class ControleDoJogador : MonoBehaviour
                Instantiate(LaserDoJogador, localDoDisparoDaEsquerda.position,localDoDisparoDaEsquerda.rotation);
                  Instantiate(LaserDoJogador, localDoDisparoDaDireita.position,localDoDisparoDaDireita.rotation);
            }
+            EfeitosSonoros.instance.somDoLaserDoJogador.Play();
         }
     }
     

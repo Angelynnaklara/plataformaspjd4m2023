@@ -66,6 +66,8 @@ public class VidaDoJogador : MonoBehaviour
 
         if(vidaAtualDoJogador<=0)
         {
+          FindObjectOfType<ControleDoJogador>().jogadorEstaVivo = false;
+          GameManager.instance.GameOver();
           Debug.Log("Game Over");
         }
       }

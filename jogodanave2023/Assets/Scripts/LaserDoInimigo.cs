@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LaserDoInimigo : MonoBehaviour
 {
+    public GameObject impactoDoLaserDoInimigo;
     public float velocidadeDoLaser;
     public int danoParaDar;
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class LaserDoInimigo : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             other.GetComponent<VidaDoJogador>().MachucarJogador(danoParaDar);
+            Instantiate(impactoDoLaserDoInimigo, transform.position, transform.rotation);
             Destroy(this.gameObject);
         }
     }

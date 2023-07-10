@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LaserDoJogador : MonoBehaviour
 {
+    public GameObject impactoDoLaserDoJogador;
     public float velocidadeDoLaser;
     public int danoParaDar; 
     // Start is called before the first frame update
@@ -20,13 +21,17 @@ public class LaserDoJogador : MonoBehaviour
     {
         transform.Translate(Vector3.up * velocidadeDoLaser * Time.deltaTime);
     }
+
       void  OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Inimigo"))
 
         {
           other.gameObject.GetComponent<Inimigos>().MachucarInimigo(danoParaDar);
-          Destroy(this.gameObject);
+          Instantiate(impactoDoLaserDoJogador, transform.position, transform.rotation);
+            EfeitosSonoros.instance.somDoImpacto.Play();
+
+            Destroy(this.gameObject);
         }
     }
 }

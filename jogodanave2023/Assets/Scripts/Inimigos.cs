@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Inimigos : MonoBehaviour
 {
+    public GameObject efeitoDeExplosao;
     public float velocidadeDoInimigo;
     public int vidaMaximaDoInimigo;
     public int vidaAtualDoInimigo;
@@ -17,6 +18,7 @@ public class Inimigos : MonoBehaviour
     public float tempoAtualDosLasers;
     public bool inimigoAtirador;
     public bool inimigoAtivado;
+    public int danoDaNave;
 
 
     // Start is called before the first frame update
@@ -45,9 +47,9 @@ public class Inimigos : MonoBehaviour
     }
 
           private void MoviventarInimigo()
-    {
-      transform.Translate(Vector3.down * velocidadeDoInimigo *Time.deltaTime);
-    }
+          {
+            transform.Translate(Vector3.down * velocidadeDoInimigo *Time.deltaTime);
+          }
     
           private void AtirarLaser()
     {
@@ -65,12 +67,25 @@ public class Inimigos : MonoBehaviour
         if(vidaAtualDoInimigo <= 0)
         {
             GameManager.instance.AumentarPontuacao(pontosParaDar);
+            Instantiate(efeitoDeExplosao, transform.position, transform.rotation);
+            EfeitosSonoros.instance.somDaExplosao.Play();
 
           int numeroAleatorio=Random.Range(0,100);
           if(numeroAleatorio<= chanceParaDropar)
           {
             Instantiate(itemParaDropar,transform.position,Quaternion.Euler(0f,0f,0f));
           }
+
+            Destroy(this.gameObject);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collisionInfo)
+    {
+        if (collisionInfo.gameObject.CompareTag("Player"))
+        {
+            collisionInfo.gameObject.GetComponent<VidaDoJogador>().MachucarJogador(danoDaNave);
+            Instantiate(efeitoDeExplosao, transform.position, transform.rotation);
+            EfeitosSonoros.instance.somDaExplosao.Play();
 
             Destroy(this.gameObject);
         }
